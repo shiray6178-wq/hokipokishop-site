@@ -50,7 +50,7 @@
     background-position: center;
 
     /* אנימציית זום */
-    animation: zoomInStore 12s ease-in-out forwards;
+    animation: zoomInStore 12s ease-in-out infinite;
 }
 
 /* אנימציית זום לתוך החנות */
