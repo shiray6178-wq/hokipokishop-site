@@ -182,7 +182,7 @@
 
  .form input[type="text"],
  .form input[type="tel"],
- .form input[type="number and text"],
+ .form input[type="email"],
 
  .form textarea {
      width: 100%;
