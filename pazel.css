@@ -76,8 +76,14 @@ body {
     background-attachment: fixed;
 }
 
+.menu-toggle {
+    display: none;
+}
+
 .side-menu {
-    background-color: #3f3f3f;
+    background-color: rgba(60, 60, 60, 0.85);
+    /* כהה אך שקוף קצת */
+    backdrop-filter: blur(6px);
     padding: 20px 15px;
     position: fixed;
     top: 170px;
@@ -85,10 +91,15 @@ body {
     direction: rtl;
     border-radius: 16px;
     box-shadow: -6px 6px 18px rgba(0, 0, 0, 0.4);
-
+    backdrop-filter: blur(4px);
     max-height: 400px;
     overflow-y: auto;
     width: fit-content;
+
+    /* אפקט קל של מעבר צבע וריפוד פנימי */
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .side-menu ul {
@@ -107,37 +118,46 @@ body {
     font-size: 19px;
     font-family: "Segoe UI", "Arial", sans-serif;
     letter-spacing: 0.5px;
+    background-color: rgba(255, 255, 255, 0.08);
+    /* עדין ויפה */
     color: #f1f1f1;
     text-decoration: none;
     border-radius: 10px;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
     white-space: nowrap;
+
+    /* קצת עומק לכל כפתור */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .side-menu a:hover {
     background-color: #bcbcbc;
     color: #2b2b2b;
     transform: translateX(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
+/* Scrollbar שקוף ועדין שתואם לתפריט */
 .side-menu::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 .side-menu::-webkit-scrollbar-track {
-    background: #2e2e2e;
+    background: transparent;
     border-radius: 10px;
 }
 
 .side-menu::-webkit-scrollbar-thumb {
-    background-color: #9c9c9c;
+    background: rgba(255, 255, 255, 0.15);
+    /* שקוף ועדין */
     border-radius: 10px;
+    transition: background 0.3s ease;
 }
 
 .side-menu::-webkit-scrollbar-thumb:hover {
-    background-color: #cfcfcf;
+    background: rgba(255, 255, 255, 0.35);
+    /* ברור יותר בהובר */
 }
-
 
 /* עיצוב קטלוג הפאזלים והכרטיסים  */
 
@@ -246,18 +266,67 @@ body {
 }
 
 .footer {
-    width: 100%;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 14px;
-    font-family: Arial, sans-serif;
-    color: white;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    margin-top: 80px;
+    background: #f7f7f7;
+    border-top: 4px solid #e53935;
+    direction: rtl;
 }
+
+/* אזור קריאה לפעולה */
+.footer-cta {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+.cta-text{
+    margin-right: 70px;
+}
+.cta-text h3 {
+    margin: 0 0 8px;
+    font-size: 24px;
+    color: #2b2b2b;
+    font-weight: 600;
+}
+
+.cta-text p {
+    margin: 0;
+    font-size: 15px;
+    color: #666;
+}
+
+/* כפתור */
+.cta-btn {
+    background: linear-gradient(135deg, #e53935, #c62828);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(229, 57, 53, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(229, 57, 53, 0.45);
+}
+
+/* פס תחתון */
+.footer-bottom {
+    background: #2b2b2b;
+    color: #ccc;
+    text-align: center;
+    padding: 12px 10px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
 
 @media (max-width: 768px) {
 
@@ -278,21 +347,62 @@ body {
         text-align: center;
     }
 
-    /* תפריט צד – הופך לרוחב עליון */
-    .side-menu {
-        position: static;
-        width: 100%;
-        margin: 10px auto;
-        border-radius: 0;
-        max-height: none;
-        box-shadow: none;
-        text-align: center;
+
+
+   .menu-toggle {
+        display: flex;
+        position: fixed;
+        bottom: auto;
+        top: 120px;
+        right: 16px;
+        height: 52px;
+        width: 52px;
+        background: #3f3f3f;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 300;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        box-shadow: -4px 6px 16px rgba(0, 0, 0, 0.3);
     }
 
+    .menu-toggle span {
+        width: 26px;
+        height: 4px;
+        background: white;
+        border-radius: 4px;
+    }
+
+    /* תפריט צד – הופך לרוחב עליון */
+    .side-menu {
+        position: fixed;
+        top: 190px;
+        /* מתחת לכפתור */
+        right: 16px;
+        bottom: auto;
+
+        width: 220px;
+        /* צר ולא רחב */
+        max-height: 60vh;
+        /* גובה ולא רוחב */
+        overflow-y: auto;
+
+        display: block;
+        transform: scale(0);
+        transform-origin: top right;
+        transition: transform 0.3s ease;
+    }
+
+
+    #menuToggle:checked~.side-menu {
+        transform: scale(1);
+    }
+
+
     .side-menu ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: block;
     }
 
     .side-menu li {
